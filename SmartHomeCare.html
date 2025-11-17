@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<link rel="stylesheet" href="estilos.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartHomeCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Raleway', sans-serif;
+      background-color: #001f3f; /* azul marino */
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 40, 90, 0.75); /* azul más oscuro */
+      padding: 20px 0;
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+    }
+
+    nav a {
+      margin: 0 20px;
+      color: white;
+      text-decoration: none;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .section {
+      padding: 140px 20px 80px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1 {  
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+}
+
+    .logo {
+      width: 160px;
+      margin-top: 20px;
+    }
+    /* Animaciones */
+    * { transition: all 0.4s ease; }
+
+    h1, h2, p, img { opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s forwards; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    nav a:hover {
+      color: #7ab9ff;
+      transform: scale(1.1);
+    }
+
+    .section:hover {
+      transform: scale(1.02);
+    }
+    /* Efecto neón en títulos */
+    h1, h2 {
+      text-shadow: 0 0 4px #ffffff, 0 0 8px #ffffff;
+      letter-spacing: 1px;
+    }
+
+    /* Parpadeo suave tipo luz */
+    @keyframes glow {
+      0% { text-shadow: 0 0 2px #ffffff; }
+      50% { text-shadow: 0 0 3px #ffffff; }
+      100% { text-shadow: 0 0 2px #ffffff; }
+    }
+    h1:hover, h2:hover {
+      animation: glow 1.5s infinite;
+    }
+
+    /* Animación extra */
+    .section:hover {
+      transform: scale(1.03);
+      filter: brightness(1.15);
+    }
+
+    nav a {
+      text-shadow: 0 0 6px #ffffff;
+    }
+
+a, button {
+    background-color: #38b6ff;
+    color: #0a1830;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+a:hover, button:hover {
+    background-color: #12628a;
+}
+  </style>
+</head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartHomeCare - DomotiCare</title>
+    
+    <!-- Favicon con tu imagen actual -->
+    <link rel="icon" href="Captura.png" type="image/png">
+    
+    <link rel="stylesheet" href="estilos.css">
+    <script src="componentes.js"></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="#quienes">¿Quiénes somos?</a>
+      <a href="#objetivos">Objetivos</a>
+      <a href="#vision">Visión</a>
+      <a href="#clientes">Clientes</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#equipo">Equipo</a>
+    </nav>
+  </header>
+
+  <section class="section" id="quienes">
+    <h1>SmartHomeCare</h1>
+<h1>
+    <img src ="Captura.png" alt = "Logo SmartHomeCare" class ="logo">
+</h1>
+    <h2>¿Quiénes somos?</h2>
+    <p>Somos DomotiCare, una empresa dedicada a desarrollar soluciones tecnológicas inclusivas. Nuestra misión es mejorar la calidad de vida de personas con movilidad reducida mediante dispositivos inteligentes, accesibles y fáciles de usar.
+</p>
+  </section>
+
+  <section class="section" id="objetivos">
+    <h2>Fundamentación y objetivos</h2>
+    <p>Nosotros creamos SmartHomeCare que es un sistema de domótica en una casa que permite controlar luces, ventilador, puerta de entrada y temperatura mediante una aplicación móvil o de manera automática. Está pensado para personas con movilidad limitada, y buscamos: </p>
+ <strong>Nuestros objetivos principales son:</strong>
+<ul style="list-style: disc; text-align: left; max-width: 600px; margin: 20px auto;">
+<li>Facilitar el control del hogar.</li>
+<li>Aumentar la autonomía.</li>
+<li>Promover la inclusión a través de la tecnología.</li>
+</ul></p>
+</section>
+
+  <section class="section" id="vision">
+    <h2>Visión</h2>
+    <p>Queremos ofrecer una solución tecnológica que promueva la independencia y la accesibilidad, ayudando a construir una sociedad más inclusiva donde la tecnología sea una herramienta de apoyo real.</p>
+  </section>
+
+ <section class="section" id="clientes">
+<h2>Clientes o usuarios potenciales</h2>
+<p>Está principalmente diseñado para personas con movilidad reducida, ya sea por discapacidades físicas, edad avanzada o cualquier condición que limite su movilidad.</p>
+<br>
+<h3 style="font-size:1.7rem; margin-bottom:10px;">Ejemplos reales de uso</h3>
+
+<li><strong>Hernán (68 años):</strong> Vive solo y tiene dificultades para moverse debido a su edad. Con SmartHomeCare puede controlar las luces desde una aplicación sin necesidad de levantarse ni caminar hasta los interruptores.</li>
+<br>
+<li><strong>Valeria (10 años):</strong> Tiene discapacidad motriz por un accidente y usa silla de ruedas. Le resulta difícil alcanzar interruptores o abrir puertas. Nuestro sistema le permite encender luces, activar ventiladores y abrir puertas de manera independiente.</li>
+</ul>
+</section>
+
+<section class="section" id="app">
+  <h2>Aplicación</h2>
+  <p>Nuestra aplicación móvil es la herramienta principal que permite controlar toda la casa inteligente de manera rápida y accesible. Desde una interfaz simple y moderna, el usuario puede encender y apagar luces, activar ventiladores, abrir puertas y gestionar otros dispositivos conectados. </p>
+  <a href="app2 mejorada (2).HTML" target="_blank" class="app-link"> Abrir App</a>
+</section>
+
+
+<section class="section" id="proceso">
+
+  <section class="section" id="proceso">
+    <h1>Proceso de trabajo</h1>
+    <h2> Programación en Arduino y conexión con la aplicación</h2>
+<p> Descripción del proceso... </p> 
+
+
+<h2> Circuito</h2>
+<p>Descripción del circuito...</p>
+
+
+<h2> Modelado de la casa en Blender</h2>
+<p>Detalles del modelado...</p>
+<div style="display:flex; justify-content:center; margin-top:20px;">
+  <img src="https://i.postimg.cc/C5mJ2ZJZ/fotocasa.png"
+       alt="Foto Casa"
+       style="width:80%; max-width:900px; border-radius:12px; box-shadow:0 6px 14px rgba(0,0,0,0.25);">
+</div>
+
+
+
+<h2> Modelado de la caja en Blender</h2>
+<p>Detalles del modelado...</p>
+
+
+<h2> Impresión 3D</h2>
+<p>Proceso de impresión...</p>
+
+<h2> Render</h2>
+<p>El renderizado es un proceso que transforma el modelado 3D en una imagen realista, usando luces, sombras, materiales y una cámara. </p>
+<ul style="list-style: disc; text-align: left; max-width: 600px; margin: 20px auto;">
+<li> El tipo de render que usamos fue Cycles para una imagen más realista. </li>
+<li> Usamos luces para que se vean los materiales y fuimos ajustando la intensidad o ubicación para que coincida con las de la imagen de fondo. </li>
+<li> Los materiales que usamos fueron unos simples que simulaban plástico o cartón, y para llegar a ellos se ajustaba la rugosidad, el reflejo, y el color. </li>
+</ul> 
+<div style="text-align:center; margin-top: 30px;">
+  <h2>Vista del prototipo</h2>
+<h3>Utilizamos un ejemplo con nuestra impresión 3d de forma abierta</h3>
+  <img src="https://i.postimg.cc/59PJYkNF/USAR-ABIERTA-(1).png"
+       alt="Render abierto"
+       style="width: 45%; max-width: 450px; margin: 10px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.25);">
+
+       <h3>Y otro de forma cerrada, cumpliendo la funcion de nuestra tapa</h3>
+  <img src="https://i.postimg.cc/jq8Twkdy/USAR-CERRADA-(1).png"
+       alt="Render cerrado"
+       style="width: 45%; max-width: 450px; margin: 10px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.25);">
+       <h3>Finalmente, la casa en sí</h3>
+         <img src="https://i.postimg.cc/JzTKxBt0/USAR-CASA-RENDER-(2).png"
+       alt="Render casa"
+       style="width: 45%; max-width: 450px; margin: 10px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.25);">
+</div>
+
+<h2> Armado de la casa</h2>
+<p>Descripción del armado...</p>
+<div style="display:flex; justify-content:center; gap:1cm; margin-top:20px; text-align:center;">
+  <img src="https://i.postimg.cc/BbYtksFD/2.jpg"
+       alt="Imagen 2"
+       style="width:30%; max-width:320px; border-radius:10px;">
+
+         <img src="https://i.postimg.cc/vTqDkMnn/1.jpg"
+       alt="Imagen 1"
+       style="width:30%; max-width:320px; border-radius:10px;">
+
+  <img src="https://i.postimg.cc/BbYtksFS/3.jpg"
+       alt="Imagen 3"
+       style="width:30%; max-width:320px; border-radius:10px;">
+
+</div>
+
+
+
+
+<h2>Proyecto finalizado</h2>
+<p>Descripción final del proyecto...</p>
+  </section>
+
+  <section class="section" id="equipo">
+    <h2>Nuestro equipo</h2>
+    <h3> Julieta Gatto Bracco</h3>
+     <p> Arduino, Conexiones y Pagina Web</p>
+    <h3> Zoe Bugallo</h3>
+     <p> Render y Pagina Web</p>
+    <h3> Candelaria Dattoli</h3>
+     <p> Aplicación y conexiones</p>
+    <h3> Paloma Cardone</h3>
+     <p> Impresión y modelado 3D</p>
+    <h3> Santino Magnacco</h3>
+     <p> Maqueta de la casa y conexiones</p>
+  </section>
+
+  <footer>
+<p>SmartHomeCare — Proyecto Escolar 2025</p>
+</footer>
+
+</body>
+</html>
+</body>
+</html>
