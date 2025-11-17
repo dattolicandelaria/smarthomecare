@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartHomeCare - Control Domótico</title>
+    
+    <!-- jQuery Mobile CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css" />
+    
+    <!-- Theme -->
+    <link rel="stylesheet" href="https://gorosito.red/bloques/apps/vendor/themes/themario2.min.css">
+    <link rel="stylesheet" href="https://gorosito.red/bloques/apps/vendor/themes/jquery.mobile.icons.min.css">
+    
+    <!-- NativeDroid2 CSS -->
+    <link rel="stylesheet" href="https://gorosito.red/bloques/apps/css/nativedroid2.css" />
+    <link rel="stylesheet" href="https://gorosito.red/bloques/apps/css/nativedroid2.color.cyan.css">
+    
+    <!-- Estilos personalizados -->
+    <style>
+        ::-webkit-scrollbar {width: 10px} 
+        ::-webkit-scrollbar-track {background: #000} 
+        ::-webkit-scrollbar-thumb {background: cyan} 
+        ::-webkit-scrollbar-thumb:hover {background: red} 
+        .jexcel .editor .jclose:after {color:black!important} 
+        
+        [centrado]{text-align:center} 
+        [justificado]{text-align:justify}
+        [derecha]{text-align:right;}
+        [tachado]{text-decoration:strike-through}
+        [responsive]{width:960px;margin:auto;}
+        
+        @media (max-width:970px) {
+            [responsive]{width:90%}
+        }
+        
+        .skeleton{margin:auto}
+        [tiene-sombra]{box-shadow:4px 4px 8px rgba(0,0,0,.7);}
+        
+        /* Estilos personalizados para domótica */
+        .solo-rojo {
+            background: #e53935 !important; 
+            border: 1px solid #b71c1c !important; 
+            color: #fff !important; 
+            text-shadow: none !important; 
+        }
+        
+        .modo-activo {
+            background: #4CAF50 !important; 
+            border: 1px solid #2E7D32 !important; 
+            color: #fff !important; 
+            text-shadow: none !important; 
+        }
+        
+        .modo-inactivo {
+            background: #f0f0f0 !important;
+            border: 1px solid #ccc !important;
+            color: #333 !important;
+        }
+        
+        .modo-conf {
+            background: #FF9800 !important;
+            border: 1px solid #F57C00 !important;
+            color: #fff !important;
+        }
+        
+        .estado-sistema {
+            text-align: center; 
+            padding: 10px; 
+            margin: 10px 0; 
+            border-radius: 5px; 
+            background: #f0f0f0;
+            font-weight: bold;
+        }
+        
+        .panel-control {
+            margin: 15px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .panel-titulo {
+            background: #0c2755;
+            color: white;
+            padding: 10px 15px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .panel-contenido {
+            background: white;
+            padding: 15px;
+        }
+        
+        .dispositivo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        
+        .dispositivo:last-child {
+            margin-bottom: 0;
+        }
+        
+        .dispositivo-info {
+            flex-grow: 1;
+        }
+        
+        .dispositivo-nombre {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .dispositivo-estado {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .dispositivo-controls {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .estado-indicador {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        .estado-activo {
+            background: #4CAF50;
+        }
+        
+        .estado-inactivo {
+            background: #e53935;
+        }
+        
+        .estado-desconectado {
+            background: #FF9800;
+        }
+        
+        .hero-section {
+            width: 100%;
+            height: 30vh;
+            background-image: url('https://i.postimg.cc/9QFdf007/USAR-CASA-RENDER-(1).png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        }
+        
+        .hero-texto {
+            text-align: center;
+            background: rgba(12, 39, 85, 0.7);
+            padding: 15px 30px;
+            border-radius: 10px;
+        }
+        
+        .hero-texto h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .modo-selector {
+            display: flex;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        
+        .modo-boton {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            background: #f0f0f0;
+            border: none;
+            font-weight: bold;
+        }
+        
+        .modo-boton.activo {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .modo-boton.config {
+            background: #FF9800;
+            color: white;
+        }
+        
+        .estadisticas {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin: 15px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .estadistica-item {
+            flex: 1;
+        }
+        
+        .estadistica-valor {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0c2755;
+        }
+        
+        .estadistica-etiqueta {
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+    
+    <!-- Otras librerías -->
+    <link rel="stylesheet" href="https://gorosito.red/dame/draggula.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://gorosito.red/bloques/apps/vendor/waves/waves.min.css">
+    <script src="https://unpkg.com/split.js/dist/split.min.js"></script>
+    <script src="./componentes.js"></script>
+    
+    <!-- Metainformación de la página web -->
+    <meta color-theme="cyan" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+</head>
+<body>
+    <!--<script>document.body.style.display="none"</script>--> 
+    
+    <section id="idPagina1" data-role="page" data-theme="a">
+        <header data-role="header" data-position="fixed" data-theeme="b" style="background-color: #0c2755; color:white;">
+            <h1 izquierda>SmartHomeCare</h1>
+            <arduino-usb id="arduino" eventos="fnArduino"></arduino-usb>
+            <broker-mqtt id="conexion">
+                <SmartHomeCare>fnInternet</SmartHomeCare>
+            </broker-mqtt>
+        </header>
+        
+        <div class="hero-section">
+            <div class="hero-texto">
+                <h2>Casa Inteligente</h2>
+                <p>Controla tu hogar de forma remota</p>
+            </div>
+        </div>
+
+        <article data-role="content">
+            <!-- Estado actual del sistema -->
+            <div id="estadoSistema" class="estado-sistema">
+                <strong>Estado: </strong><span id="textoEstado">Conectando...</span>
+            </div>
+            <!-- Selector de modo -->
+            <div class="modo-selector">
+                <button id="btnManual" class="modo-boton" onclick="cambiarModo('manual')">
+                    <i class="fa fa-user"></i> Manual
+                </button>
+                <button id="btnAutomatico" class="modo-boton" onclick="cambiarModo('auto')">
+                    <i class="fa fa-cog"></i> Automático
+                </button>
+            </div>
+            
+            <!-- Panel de control de iluminación -->
+            <div class="panel-control">
+                <div class="panel-titulo">
+                    <i class="fa fa-lightbulb-o"></i> Control de Iluminación
+                </div>
+                <div class="panel-contenido">
+                    <div class="dispositivo">
+                        <div class="dispositivo-info">
+                            <div class="dispositivo-nombre">Luces</div>
+                        </div>
+                        <div class="dispositivo-controls">
+                            <a data-role="button" data-ajax="false" data-mini="true" data-icon="heart" 
+                               href="javascript:arduino.enviar('luces-prender')">Encender</a>
+                            <a class="solo-rojo" data-role="button" data-ajax="false" data-mini="true" data-icon="heart" 
+                               href="javascript:arduino.enviar('luces-apagar')">Apagar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Panel de control de climatización -->
+            <div class="panel-control">
+                <div class="panel-titulo">
+                    <i class="fa fa-thermometer-half"></i> Control de Ventilación
+                </div>
+                <div class="panel-contenido">
+                    <div class="dispositivo">
+                        <div class="dispositivo-info">
+                            <div class="dispositivo-nombre">Ventiladores</div>
+                        </div>
+                        <div class="dispositivo-controls">
+                            <a data-role="button" data-ajax="false" data-mini="true" data-icon="cloud" 
+                               href="javascript:arduino.enviar('vent-prender')">Encender</a>
+                            <a class="solo-rojo" data-role="button" data-ajax="false" data-mini="true" data-icon="cloud" 
+                               href="javascript:arduino.enviar('vent-apagar')">Apagar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Panel de control de acceso -->
+            <div class="panel-control">
+                <div class="panel-titulo">
+                    <i class="fa fa-shield"></i> Control de Acceso
+                </div>
+                <div class="panel-contenido">
+                    <div class="dispositivo">
+                        <div class="dispositivo-info">
+                            <div class="dispositivo-nombre">Puerta Principal</div>
+                        </div>
+                        <div class="dispositivo-controls">
+                            <a data-role="button" data-ajax="false" data-mini="true" data-icon="home" 
+                               href="javascript:arduino.enviar('abrir')">Abrir</a>
+                            <a class="solo-rojo" data-role="button" data-ajax="false" data-mini="true" data-icon="home" 
+                               href="javascript:arduino.enviar('cerrar')">Cerrar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Botón de reinicio -->
+            <div style="margin-top: 20px;">
+                <a data-role="button" data-ajax="false" data-icon="refresh" href="javascript:location.reload()">Reiniciar Sistema</a>
+            </div>
+        </article>
+    </section>
+
+    <script>
+        // Variable para almacenar el modo actual
+        let modoActual = 'conf'; // Inicialmente en estado de configuración
+        let esperandoConfirmacion = false;
+        
+        // Función para cambiar entre modos
+        function cambiarModo(modo) {
+            if (esperandoConfirmacion) {
+                console.log('Esperando confirmación del modo anterior...');
+                return;
+            }
+            
+            // Enviar comando al Arduino (solo "manual" o "auto")
+            arduino.enviar(modo);
+            esperandoConfirmacion = true;
+            
+            // Actualizar estado visual temporal
+            actualizarEstado('Enviando comando...', 'modo-conf');
+            
+            console.log('Solicitando cambio a modo: ' + modo);
+            
+            // Timeout por si no hay respuesta
+            setTimeout(function() {
+                if (esperandoConfirmacion) {
+                    esperandoConfirmacion = false;
+                    actualizarEstado('Presente error, sin respuesta del Arduino -> Revisar conexion', 'solo-rojo');
+                    console.error('Timeout: No se recibió confirmación del Arduino');
+                }
+            }, 3000);
+        }
+        
+        // Función para actualizar la interfaz según el modo
+        function actualizarModoVisual(modo) {
+            const btnManual = document.getElementById('btnManual');
+            const btnAutomatico = document.getElementById('btnAutomatico');
+            
+            // Resetear ambas clases
+            btnManual.classList.remove('activo', 'config');
+            btnAutomatico.classList.remove('activo', 'config');
+            
+            if (modo === 'manual') {
+                btnManual.classList.add('activo');
+                actualizarEstado('Modo Manual', 'modo-activo');
+            } else if (modo === 'auto') {
+                btnAutomatico.classList.add('activo');
+                actualizarEstado('Modo Automático', 'modo-activo');
+            } else if (modo === 'conf') {
+                btnManual.classList.add('config');
+                btnAutomatico.classList.add('config');
+                actualizarEstado('Modo Configuración', 'modo-conf');
+            }
+            
+            modoActual = modo;
+        }
+        
+        // Función para actualizar el estado del sistema
+        function actualizarEstado(mensaje, clase) {
+            const estadoElement = document.getElementById('estadoSistema');
+            const textoElement = document.getElementById('textoEstado');
+            
+            textoElement.textContent = mensaje;
+            estadoElement.className = 'estado-sistema';
+            if (clase) {
+                estadoElement.classList.add(clase);
+            }
+        }
+        
+        // Función para manejar las respuestas del Arduino
+        function fnArduino(datos) {
+            console.log('Arduino dice:', datos);
+            
+            // Limpiar y procesar datos
+            datos = datos.trim().toLowerCase();
+            
+            // Procesar respuesta del Arduino
+            if (datos.includes('manual')) {
+                esperandoConfirmacion = false;
+                actualizarModoVisual('manual');
+                console.log('Modo confirmado: Manual');
+            } 
+            else if (datos.includes('auto')) {
+                esperandoConfirmacion = false;
+                actualizarModoVisual('auto');
+                console.log('Modo confirmado: Automático');
+            }
+            else if (datos.includes('conf') || datos.includes('estado 0')) {
+                esperandoConfirmacion = false;
+                actualizarModoVisual('conf');
+                console.log('Arduino en modo configuración');
+            }
+            else if (datos.includes('error') || datos.includes('fail')) {
+                esperandoConfirmacion = false;
+                actualizarEstado('Error: ' + datos, 'solo-rojo');
+                console.error('Error del Arduino:', datos);
+            }
+            else if (datos.includes('ok') || datos.includes('recibido')) {
+                // Respuesta genérica positiva
+                esperandoConfirmacion = false;
+                console.log('Comando recibido correctamente');
+            }
+            
+            // Procesar datos de sensores (ejemplo)
+            if (datos.includes('temp:')) {
+                const temp = datos.split('temp:')[1].split(' ')[0];
+                document.getElementById('tempActual').textContent = temp + '°C';
+            }
+            
+            if (datos.includes('hum:')) {
+                const hum = datos.split('hum:')[1].split(' ')[0];
+                document.getElementById('humActual').textContent = hum + '%';
+            }
+        }
+        
+        // Inicializar al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicialmente en estado de configuración
+            actualizarModoVisual('conf');
+            
+            // Solicitar estado actual al Arduino
+            setTimeout(function() {
+                arduino.enviar('estado');
+                console.log('Solicitando estado actual al Arduino...');
+            }, 1000);
+        });
+        
+        function fnInternet(_serial) { 
+            arduino.enviar(_serial);
+        }
+        
+        xlks=Array.from(document.querySelectorAll("[diapositiva]"));
+        xlksn = xlks.map(function(x){return x.querySelector("[data-role=header] h1").innerHTML});
+        xlks.forEach(function(item,orden){
+            item.querySelector("span[anterior]").innerHTML = xlksn[orden-1] || "";
+            item.querySelector("span[siguiente]").innerHTML = xlksn[orden+1] || "" ;
+        })
+    </script>
+
+    <script>
+        $( document ).on( "mobileinit", function() {
+            $.mobile.ignoreContentEnabled = true;
+            if(navigator.userAgent.indexOf("Chrome")>=0){
+                $.mobile.changePage.defaults.changeHash = false; 
+                $.mobile.hashListeningEnabled = false; 
+                $.mobile.pushStateEnabled = false;
+            }
+        });
+    </script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+    <script src="https://gorosito.red/bloques/apps/js/nativedroid2.js"></script>
+    
+    <script>
+        $(function(){
+            document.body.style.display="block";
+        })
+    </script>
+</body>
+</html>
